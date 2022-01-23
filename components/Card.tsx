@@ -13,7 +13,7 @@ interface cardProps {
 
 const Card = ({ title, id, type, imageUrl }: cardProps) => {
   const typeContent = contents.find((content) => content.type === type);
-
+  const capitalTitle = title[0].toUpperCase() + title.substring(1);
   return (
     <div
       className={styles.cardContainer}
@@ -24,7 +24,7 @@ const Card = ({ title, id, type, imageUrl }: cardProps) => {
           {getSVG({ width: 50, opacity: 1, classList: '' })}
           <p className={styles.index}>#{id}</p>
         </div>
-        {title}
+        {capitalTitle}
       </div>
       <div
         className={styles.type}
@@ -35,8 +35,12 @@ const Card = ({ title, id, type, imageUrl }: cardProps) => {
       >
         {getSVG({ type, width: 20 })}
       </div>
-      <Image src="/" width={150} alt={title} />
-      {getSVG({ width: 150, classList: styles.pokeballBk })}
+      <figure className={styles.image}>
+        <Image src={imageUrl} layout="fill" alt={title} />
+      </figure>
+      <div className={styles.pokeballBk}>
+        {getSVG({ width: 150, color: typeContent?.defaultColor })}
+      </div>
     </div>
   );
 };

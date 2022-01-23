@@ -3,8 +3,9 @@
   height: 120px;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   position: relative;
+  cursor: pointer;
+  user-select: none;
 }
 
 .type {
@@ -17,7 +18,14 @@
 }
 
 .pokeballBk {
+  right: 0;
+  height: 120px;
   position: absolute;
+  overflow: hidden;
+}
+
+.pokeballBk svg {
+  position: relative;
   right: -75px;
   top: -10px;
   transform: rotate(-45deg);
@@ -32,6 +40,7 @@
   margin: 15px 0px 0px 15px;
   font-size: 16px;
   color: #fff;
+  font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
@@ -45,6 +54,15 @@
 
 .index {
   position: absolute;
-  color: #000000;
+  color: #5a5a5a;
   font-size: 14px;
+}
+
+.image {
+  position: absolute;
+  height: 175px;
+  width: 175px;
+  left: 45%;
+  top: -50px;
+  z-index: 2;
 }
