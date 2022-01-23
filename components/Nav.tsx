@@ -24,13 +24,20 @@ const Nav = () => {
   return (
     <nav className={styles.nav}>
       <div className={styles.above}>
-        <h1 className={styles.title}>PokeDex</h1>
+        <Link href="/" passHref>
+          <a>
+            <h1 className={styles.title}>PokeDex</h1>
+          </a>
+        </Link>
+
         <ul className={styles.list}>
           <li>
-            <Link href="/bookmarks" passHref>
-              <i className="fas fa-heart" />
+            <Link href="/bookmarks">
+              <a>
+                <i className="fas fa-heart" />
+                Bookmarks
+              </a>
             </Link>
-            <Link href="/bookmarks">Favoritos</Link>
           </li>
         </ul>
       </div>
