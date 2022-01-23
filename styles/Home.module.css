@@ -1,6 +1,3 @@
-.container {
-  padding: 0 2rem;
-}
 
 .main {
   min-height: 100vh;
@@ -10,6 +7,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.grid {
+  display: grid;
+  width: 80%;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .footer {

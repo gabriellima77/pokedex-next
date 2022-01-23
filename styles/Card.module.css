@@ -1,0 +1,50 @@
+.cardContainer {
+  width: 300px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.type {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin: 5px 0px 0px 25px;
+}
+
+.pokeballBk {
+  position: absolute;
+  right: -75px;
+  top: -10px;
+  transform: rotate(-45deg);
+}
+
+.titleContainer {
+  display: flex;
+  height: fit-content;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0px 0px 15px;
+  font-size: 16px;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.indexContainer {
+  display: grid;
+  place-items: center;
+  height: fit-content;
+  position: relative;
+  margin-right: 5px;
+}
+
+.index {
+  position: absolute;
+  color: #000000;
+  font-size: 14px;
+}

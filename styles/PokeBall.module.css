@@ -1,7 +1,7 @@
 .pokeball {
   top: 20%;
   transform: rotate(45deg);
-  position: sticky;
+  position: fixed;
   z-index: 0;
   align-self: center;
 }

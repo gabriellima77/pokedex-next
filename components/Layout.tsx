@@ -1,10 +1,8 @@
 import React from 'react';
-import Image from 'next/image';
 import styles from '../styles/Layout.module.css';
-import { default as pokeball } from '../public/pokeball.svg';
 import Meta from './Meta';
 import Nav from './Nav';
-import PokeBallSVG from './PokeBallSVG';
+import { getSVG } from './SVG/GetSVG';
 
 const Layout: React.FC = ({ children }) => {
   return (
@@ -12,7 +10,7 @@ const Layout: React.FC = ({ children }) => {
       <Meta />
       <Nav />
       <div className={styles.container}>
-        <PokeBallSVG width={600} />
+        {getSVG({ width: 600 })}
         {children}
       </div>
     </>
