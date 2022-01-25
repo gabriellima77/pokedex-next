@@ -5,6 +5,7 @@ import Fire from './Fire';
 import Grass from './Grass';
 import Water from './Water';
 import PokeBall from './PokeBall';
+import PokeBallFull from './PokeBallFull';
 
 interface svgProps {
   color?: string;
@@ -28,6 +29,8 @@ export const getSVG = ({
       return <Water color={color} width={width} classList={classList} />;
     case 'grass':
       return <Grass color={color} width={width} classList={classList} />;
+    case 'pokeball':
+      return <PokeBallFull width={width} classList={classList} />;
     default:
       return (
         <PokeBall

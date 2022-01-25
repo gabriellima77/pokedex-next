@@ -21,7 +21,7 @@ const Card = ({ title, id, type, imageUrl }: cardProps) => {
     >
       <div className={styles.titleContainer}>
         <div className={styles.indexContainer}>
-          {getSVG({ width: 50, opacity: 1, classList: '' })}
+          {getSVG({ type: 'pokeball', width: 50, opacity: 1, classList: '' })}
           <p className={styles.index}>#{id}</p>
         </div>
         {capitalTitle}

@@ -1,5 +1,5 @@
 export interface svgProps {
-  color: string;
+  color?: string;
   width: number;
   classList?: string;
   opacity?: number;
