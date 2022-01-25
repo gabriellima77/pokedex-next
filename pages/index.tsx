@@ -1,53 +1,29 @@
 import type { GetStaticProps, NextPage, InferGetStaticPropsType } from 'next';
+import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 import Card from '../components/Card';
-
-type Pokemons = Array<pokemon>;
-
-interface pokemon {
-  name: string;
-  id: number;
-  sprites: sprites;
-  types: arrayTypes;
-  stats: arrayStats;
-}
-
-type arrayStats = Array<stats>;
-
-interface stats {
-  base_stats: string;
-  stat: {
-    name: string;
-  };
-}
-
-interface sprites {
-  front_default: string;
-  back_default: string;
-}
-
-type arrayTypes = Array<types>;
-
-interface types {
-  type: {
-    name: string;
-  };
-}
+import { pokemon } from './pokemonType';
 
 const Home: NextPage = ({
   pokemons,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  console.log(pokemons);
   const getCards = () =>
     pokemons.map((pokemon: pokemon) => {
       return (
-        <Card
+        <Link
           key={pokemon.id}
-          title={pokemon.name}
-          id={pokemon.id}
-          type={pokemon.types[0].type.name}
-          imageUrl={pokemon.sprites.front_default}
-        />
+          href="/pokemon/[id]"
+          as={`/pokemon/${pokemon.id}`}
+        >
+          <a>
+            <Card
+              title={pokemon.name}
+              id={pokemon.id}
+              type={pokemon.types[0].type.name}
+              imageUrl={pokemon.sprites.front_default}
+            />
+          </a>
+        </Link>
       );
     });
 
