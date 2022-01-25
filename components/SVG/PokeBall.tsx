@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from '../../styles/PokeBall.module.css';
 import { svgProps } from './svgProps';
 
 const PokeBall = ({ color, width, classList, opacity }: svgProps) => {
@@ -41,7 +40,7 @@ const PokeBall = ({ color, width, classList, opacity }: svgProps) => {
 PokeBall.defaultProps = {
   color: '#FFFFFF',
   width: 450,
-  classList: styles.pokeball,
+  classList: '',
   opacity: 0.75,
 };
 

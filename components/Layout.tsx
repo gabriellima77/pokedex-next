@@ -22,7 +22,12 @@ const Layout = ({ children }: layoutProps) => {
       <Meta />
       <Nav type={type} />
       <div className={styles.container}>
-        {getSVG({ width: 600, color: svgColor, opacity: svgOpacity })}
+        {getSVG({
+          width: 600,
+          color: svgColor,
+          opacity: svgOpacity,
+          classList: styles.pokeball,
+        })}
         {children}
       </div>
     </>
