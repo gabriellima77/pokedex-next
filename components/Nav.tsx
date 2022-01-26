@@ -1,16 +1,22 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { contents } from '../data';
 import styles from '../styles/Nav.module.css';
 
 interface navProps {
   type: string;
+  value: string;
+  setValue: (a: string) => void;
 }
 
-const Nav = ({ type }: navProps) => {
+const Nav = ({ type, value, setValue }: navProps) => {
   const typeContent = contents.find((content) => content.type === type);
   const linearGradient = typeContent ? typeContent.linearBackground : '';
   const defaultColor = typeContent ? typeContent.defaultColor : '';
+  const searchEvent = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const str = event.target.value;
+    setValue(str);
+  };
 
   const getSearchBar = () => {
     return (
@@ -20,6 +26,8 @@ const Nav = ({ type }: navProps) => {
           className={styles.search}
           type="text"
           placeholder="Search"
+          onChange={searchEvent}
+          value={value}
         />
         <label htmlFor="search">
           <i className="fas fa-search" />

@@ -2,10 +2,10 @@
   width: 300px;
   height: 120px;
   display: flex;
-  flex-direction: column;
   position: relative;
   cursor: pointer;
   user-select: none;
+  perspective: 1000px;
 }
 
 .type {
@@ -60,10 +60,9 @@
 }
 
 .image {
-  position: absolute;
-  height: 175px;
+  position: relative;
+  height: 160px;
   width: 175px;
-  left: 45%;
-  top: -50px;
+  top: -40px;
   z-index: 2;
 }

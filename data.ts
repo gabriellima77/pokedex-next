@@ -16,9 +16,13 @@ export const contents = [
   },
   {
     type: "rock",
+    defaultColor: "#BC7100",
+    linearBackground: "linear-gradient(90deg, #824B0C 0%, #C27113 27.08%, #FFA63F 51.04%, #C27113 75.52%, #824B0C 100%)",
   },
   {
     type: "dark",
+    defaultColor: "#02000F",
+    linearBackground: "linear-gradient(90deg, #04001B 0%, #0A0045 27.08%, #12007E 51.04%, #0A0045 75.52%, #04001B 100%)",
   },
   {
     type: "poison",
@@ -52,6 +56,8 @@ export const contents = [
   },
   {
     type: "electric",
+    defaultColor: "#D6D605",
+    linearBackground: "linear-gradient(90deg, #5E5A00 0%, #8D8800 27.08%, #FCFF5E 51.04%, #8D8800 75.52%, #5E5A00 100%)"
   },
   {
     type: "dragon",
