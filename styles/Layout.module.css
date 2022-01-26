@@ -15,3 +15,17 @@
   z-index: 0;
   align-self: center;
 }
+
+.upBtn {
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  background-color: #414141;
+  border-radius: 50%;
+  bottom: 50px;
+  right: 50px;
+  border: none;
+  color: white;
+  z-index: 100;
+  cursor: pointer;
+}

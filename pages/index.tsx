@@ -13,38 +13,49 @@ const Home: NextPage = ({
   const [filteredList, setFilteredList] = useState<Pokemons>(pokemons);
   const searchValue = useContext(SearchContext);
 
-  // Load 30 more pokemon cards
+  // Add 30 new pokemons to allPokemons state
   const loadMore = async () => {
     const scrollPosition = window.innerHeight + window.scrollY;
     const bottom = document.body.offsetHeight;
     if (scrollPosition >= bottom) {
+      // Remove Event
+      window.onscroll = null;
       const lastValue = allPokemons.length;
       const newValue = lastValue + 30 >= 251 ? 251 : lastValue + 30;
-      const list: Pokemons = [];
+      const promiseList = [];
       for (let i = lastValue; i < newValue; i++) {
-        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${i + 1}`);
-        const pokemon = await res.json();
-        list.push(pokemon);
+        const res = fetch(`https://pokeapi.co/api/v2/pokemon/${i + 1}`).then(
+          (resp) => resp.json()
+        );
+        promiseList.push(res);
       }
-      setAllPokemons((prev) => [...prev, ...list]);
+      Promise.all(promiseList).then((pokemons) => {
+        setAllPokemons((prev) => [...prev, ...pokemons]);
+      });
     }
   };
 
+  // Search Event
   useEffect(() => {
+    // If is search something, isn't loading more pokemons
+    // Else more pokemons can be fetched
+    if (searchValue) window.onscroll = null;
+    else window.onscroll = loadMore;
     const search = searchValue.toLowerCase();
     setFilteredList(
       allPokemons.filter((pokemon) => pokemon.name.includes(search))
     );
-
-    // Removendo e adicionando evento para mudar a referência da lista
-    window.removeEventListener('scroll', loadMore);
-    if (search) return;
-
-    setFilteredList(allPokemons);
-    if (allPokemons.length < 251) window.addEventListener('scroll', loadMore);
-    return () => window.removeEventListener('scroll', loadMore);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allPokemons, searchValue]);
+  }, [searchValue]);
+
+  // Loading More Event
+  useEffect(() => {
+    if (allPokemons.length < 251) {
+      window.onscroll = loadMore;
+      setFilteredList(allPokemons);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allPokemons]);
 
   const getCards = () =>
     filteredList.map((pokemon: pokemon) => {
@@ -74,17 +85,19 @@ const Home: NextPage = ({
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const list = [];
+  const promiseList = [];
   // Get the first 30 pokemons data
   for (let i = 0; i < 30; i++) {
-    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${i + 1}`);
-    const pokemon = await res.json();
-    list.push(pokemon);
+    const res = fetch(`https://pokeapi.co/api/v2/pokemon/${i + 1}`).then(
+      (resp) => resp.json()
+    );
+    promiseList.push(res);
   }
+  const pokemons = await Promise.all(promiseList);
 
   return {
     props: {
-      pokemons: list,
+      pokemons,
     },
   };
 };

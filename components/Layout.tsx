@@ -1,4 +1,4 @@
-import React, { ContextType, useState } from 'react';
+import React, { ContextType, useEffect, useState } from 'react';
 import styles from '../styles/Layout.module.css';
 import Meta from './Meta';
 import Nav from './Nav';
@@ -14,6 +14,7 @@ export const SearchContext = React.createContext('');
 
 const Layout = ({ children }: layoutProps) => {
   const [value, setValue] = useState('');
+  const [show, setShow] = useState(false);
 
   // Nav styles and Pokemon page styles
   const pokemon: pokemon = children.props?.pokemon;
@@ -21,6 +22,13 @@ const Layout = ({ children }: layoutProps) => {
   const typeContent = contents.find((content) => content.type === type);
   const svgColor = typeContent ? typeContent.defaultColor : '#FFFFFF';
   const svgOpacity = type ? 1 : 0.75;
+
+  const goUp = () => window.scrollTo(0, 0);
+  const showUp = () => (window.scrollY < 100 ? setShow(false) : setShow(true));
+
+  useEffect(() => {
+    window.addEventListener('scroll', showUp);
+  }, []);
 
   return (
     <>
@@ -37,6 +45,13 @@ const Layout = ({ children }: layoutProps) => {
           {children}
         </SearchContext.Provider>
       </div>
+      <button
+        style={{ display: show ? 'block' : 'none' }}
+        className={styles.upBtn}
+        onClick={goUp}
+      >
+        <i className="fas fa-angle-double-up"></i>
+      </button>
     </>
   );
 };
