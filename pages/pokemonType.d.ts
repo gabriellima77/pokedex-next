@@ -6,12 +6,13 @@ export interface pokemon {
   sprites: sprites;
   types: arrayTypes;
   stats: arrayStats;
+  height: number;
 }
 
 type arrayStats = Array<stats>;
 
 interface stats {
-  base_stats: string;
+  base_stat: number;
   stat: {
     name: string;
   };

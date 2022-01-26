@@ -11,6 +11,7 @@ const Home: NextPage = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [allPokemons, setAllPokemons] = useState<Pokemons>(pokemons);
   const [filteredList, setFilteredList] = useState<Pokemons>(pokemons);
+  const maxPokemons = 251;
   const searchValue = useContext(SearchContext);
 
   // Add 30 new pokemons to allPokemons state
@@ -21,7 +22,8 @@ const Home: NextPage = ({
       // Remove Event
       window.onscroll = null;
       const lastValue = allPokemons.length;
-      const newValue = lastValue + 30 >= 251 ? 251 : lastValue + 30;
+      const newValue =
+        lastValue + 30 >= maxPokemons ? maxPokemons : lastValue + 30;
       const promiseList = [];
       for (let i = lastValue; i < newValue; i++) {
         const res = fetch(`https://pokeapi.co/api/v2/pokemon/${i + 1}`).then(
@@ -50,8 +52,11 @@ const Home: NextPage = ({
 
   // Loading More Event
   useEffect(() => {
-    if (allPokemons.length < 251) {
+    if (allPokemons.length < maxPokemons) {
       window.onscroll = loadMore;
+      setFilteredList(allPokemons);
+    } else if (allPokemons.length === maxPokemons) {
+      window.onscroll = null;
       setFilteredList(allPokemons);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
