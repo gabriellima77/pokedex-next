@@ -7,6 +7,11 @@ export interface pokemon {
   types: arrayTypes;
   stats: arrayStats;
   height: number;
+  species: species;
+}
+
+type species = {
+  url: string;
 }
 
 type arrayStats = Array<stats>;

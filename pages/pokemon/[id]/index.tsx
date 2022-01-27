@@ -1,11 +1,12 @@
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import Meta from '../../../components/Meta';
 import styles from '../../../styles/Pokemon.module.css';
 import { getSVG } from '../../../components/SVG/GetSVG';
 import { pokemon } from '../../pokemonType';
 import { contents } from '../../../data';
+import Evolution from '../../../components/Evolution';
 
 interface pokemonProps {
   pokemon: pokemon;
@@ -17,15 +18,13 @@ const Pokemon = ({ pokemon }: pokemonProps) => {
   const type = pokemon.types[0].type.name;
   const captalizedType = type[0].toUpperCase() + type.substring(1);
   const content = contents.find((content) => content.type === type);
-  // <Meta title={article.title} />
-  // <h1>{article.title}</h1>
-  // <p>{article.body}</p>
-  // <br />
-  // <Link href="/">Go Back</Link>
+
   const getStatus = () => {
     const maxStatus = 300;
-    return pokemon.stats.map((content, index) => {
+    let total = 0;
+    const status = pokemon.stats.map((content, index) => {
       const base = content.base_stat;
+      total += base;
       const percentage = base * (100 / maxStatus);
       let { name } = content.stat;
       name = name.toUpperCase();
@@ -42,6 +41,12 @@ const Pokemon = ({ pokemon }: pokemonProps) => {
         </div>
       );
     });
+    status.push(
+      <div key="total" className={styles.status}>
+        <p style={{ marginRight: '305px' }}>Total: {total}</p>
+      </div>
+    );
+    return status;
   };
 
   const getHeight = () => {
@@ -87,6 +92,7 @@ const Pokemon = ({ pokemon }: pokemonProps) => {
           <div>{getStatus()}</div>
         </div>
       </section>
+      <Evolution id={pokemon.id} />
     </>
   );
 };
