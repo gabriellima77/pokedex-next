@@ -8,7 +8,24 @@ export interface pokemon {
   stats: arrayStats;
   height: number;
   species: species;
+  moves: moves;
 }
+
+type moves = [
+  {
+    move: {
+      name: string;
+    }
+    version_group_details: [
+      {
+        level_learned_at: number;
+        move_learn_method: {
+          name: string;
+        };
+      }
+    ]
+  }
+];
 
 type species = {
   url: string;

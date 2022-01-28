@@ -7,6 +7,7 @@ import { getSVG } from '../../../components/SVG/GetSVG';
 import { pokemon } from '../../pokemonType';
 import { contents } from '../../../data';
 import Evolution from '../../../components/Evolution';
+import Moves from '../../../components/Moves';
 
 interface pokemonProps {
   pokemon: pokemon;
@@ -93,6 +94,7 @@ const Pokemon = ({ pokemon }: pokemonProps) => {
         </div>
       </section>
       <Evolution id={pokemon.id} />
+      <Moves moves={pokemon.moves} type={type} />
     </>
   );
 };
