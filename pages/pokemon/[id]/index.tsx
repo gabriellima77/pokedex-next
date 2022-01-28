@@ -21,6 +21,8 @@ const Pokemon = ({ pokemon }: pokemonProps) => {
   const content = contents.find((content) => content.type === type);
 
   const getStatus = () => {
+    console.log(window.innerWidth);
+    const marginRight = window.innerWidth > 420 ? '305px' : '205px';
     const maxStatus = 200;
     let total = 0;
     const status = pokemon.stats.map((content, index) => {
@@ -44,7 +46,7 @@ const Pokemon = ({ pokemon }: pokemonProps) => {
     });
     status.push(
       <div key="total" className={styles.status}>
-        <p style={{ marginRight: '305px' }}>Total: {total}</p>
+        <p style={{ marginRight }}>Total: {total}</p>
       </div>
     );
     return status;

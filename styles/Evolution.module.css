@@ -67,3 +67,36 @@
 .trigger i {
   font-size: 48px;
 }
+
+@media (max-width: 850px) {
+  .imageWrapper {
+    width: 175px;
+    height: 175px;
+  }
+}
+
+@media (max-width: 764px) {
+  .imageWrapper {
+    width: 150px;
+    height: 150px;
+  }
+
+  .trigger {
+    font-size: 12px;
+    width: 40px;
+  }
+
+  .trigger i {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 460px) {
+  .pokemonName {
+    font-size: 14px;
+  }
+  .imageWrapper {
+    width: 90px;
+    height: 90px;
+  }
+}

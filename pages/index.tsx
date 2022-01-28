@@ -12,7 +12,7 @@ const Home: NextPage = ({
   const [allPokemons, setAllPokemons] = useState<Pokemons>(pokemons);
   const [filteredList, setFilteredList] = useState<Pokemons>(pokemons);
   const maxPokemons = 251;
-  const searchValue = useContext(SearchContext);
+  let searchValue = useContext(SearchContext);
 
   // Add 30 new pokemons to allPokemons state
   const loadMore = async () => {
@@ -47,6 +47,9 @@ const Home: NextPage = ({
     setFilteredList(
       allPokemons.filter((pokemon) => pokemon.name.includes(search))
     );
+    return () => {
+      window.onscroll = null;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue]);
 
@@ -59,6 +62,9 @@ const Home: NextPage = ({
       window.onscroll = null;
       setFilteredList(allPokemons);
     }
+    return () => {
+      window.onscroll = null;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allPokemons]);
 

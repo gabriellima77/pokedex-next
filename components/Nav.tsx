@@ -52,17 +52,6 @@ const Nav = ({ type, value, setValue }: navProps) => {
             <h1 className={styles.title}>PokeDex</h1>
           </a>
         </Link>
-
-        <ul className={styles.list}>
-          <li>
-            <Link href="/bookmarks">
-              <a>
-                <i className="fas fa-heart" />
-                Bookmarks
-              </a>
-            </Link>
-          </li>
-        </ul>
       </div>
       {!type ? getSearchBar() : null}
     </nav>

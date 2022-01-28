@@ -96,18 +96,19 @@
 .status {
   display: flex;
   justify-content: flex-end;
+  margin-bottom: 20px;
 }
 
 .status p {
   margin-right: 5px;
   color: #414141;
   font-weight: bold;
+  align-self: center;
 }
 
 .stat {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
   width: 300px;
   height: 30px;
   background-color: #e0e0e0;
@@ -125,4 +126,27 @@
   font-weight: bold;
   box-sizing: border-box;
   padding-right: 5px;
+}
+
+@media (max-width: 768px) {
+  .statusContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pokemonBox {
+    margin: 20px 0 50px 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .status {
+    align-items: center;
+    width: 100%;
+  }
+
+  .stat {
+    width: 200px;
+    height: 20px;
+  }
 }

@@ -41,6 +41,18 @@
   overflow: auto;
 }
 
+.table tbody::-webkit-scrollbar {
+  width: 10px;
+}
+
+.table tbody::-webkit-scrollbar-track {
+  background: #aaaaaa;
+}
+
+.table tbody::-webkit-scrollbar-thumb {
+  background-color: #414141;
+}
+
 .table tr {
   width: 100%;
   display: flex;
@@ -48,7 +60,7 @@
   justify-content: space-around;
 }
 
-.table tr:nth-child(odd) {
+.table tbody tr:nth-child(odd) {
   background: rgb(211, 211, 211);
 }
 
@@ -57,4 +69,10 @@
   display: grid;
   place-items: center;
   width: 100%;
+}
+
+@media (max-width: 650px) {
+  .table {
+    width: 95%;
+  }
 }

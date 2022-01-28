@@ -44,9 +44,9 @@ const Moves = ({ moves, type }: movesProps) => {
       method = method.replace('-', ' ').toUpperCase();
       return (
         <tr key={moveName}>
-          <td>{lvl}</td>
-          <td>{moveName}</td>
-          <td>{method}</td>
+          <td title={'' + lvl}>{lvl}</td>
+          <td title={moveName}>{moveName}</td>
+          <td title={method}>{method}</td>
         </tr>
       );
     });
@@ -57,9 +57,15 @@ const Moves = ({ moves, type }: movesProps) => {
       <h2>Moves</h2>
       <table className={styles.table}>
         <thead style={{ background: color }}>
-          <th>Level</th>
-          <th>Move</th>
-          <th>Method</th>
+          <tr>
+            <th>Level</th>
+          </tr>
+          <tr>
+            <th>Move</th>
+          </tr>
+          <tr>
+            <th>Method</th>
+          </tr>
         </thead>
         <tbody>{getMoves()}</tbody>
       </table>

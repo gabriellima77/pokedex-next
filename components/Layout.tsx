@@ -26,6 +26,13 @@ const Layout = ({ children }: layoutProps) => {
   const goUp = () => window.scrollTo(0, 0);
   const showUp = () => (window.scrollY < 100 ? setShow(false) : setShow(true));
 
+  // clean searchBar
+  useEffect(() => {
+    const pageType = children.type.name;
+    if (pageType === 'Home') return;
+    setValue('');
+  }, [children.type.name]);
+
   useEffect(() => {
     window.addEventListener('scroll', showUp);
   }, []);
