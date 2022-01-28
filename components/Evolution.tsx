@@ -3,35 +3,50 @@ import React, { useEffect, useState } from 'react';
 import { Pokemons } from '../pages/pokemonType';
 import styles from '../styles/Evolution.module.css';
 import { contents } from '../data';
+import Link from 'next/link';
 
 type evolutionProps = {
   id: number;
 };
 
 interface evolution {
+  id: number;
   chain: {
     species: { name: string };
-    evolves_to: [
-      {
-        species: { name: string };
-        evolves_to: [
-          {
-            species: { name: string };
-          }
-        ];
-      }
-    ];
-    evolution_detail: [
-      {
-        trigger: { name: string };
-        min_level: number;
-      }
-    ];
+    evolves_to: evolves;
   };
+}
+
+type evolutionDetails = Array<evolutionDetail>;
+
+interface evolutionDetail {
+  trigger: { name: string };
+  min_level: number;
+  item: {
+    name: string;
+  };
+  min_happiness: number;
+  time_of_day: string;
+}
+
+type evolves = [
+  {
+    evolution_details: evolutionDetails;
+    species: { name: string };
+    evolves_to: evolves;
+  }
+];
+
+interface createImageProps {
+  src: string;
+  id: number;
+  color?: string;
+  name: string;
 }
 
 const Evolution = ({ id }: evolutionProps) => {
   const [evolution, setEvolution] = useState<Pokemons>();
+  const [triggers, setTriggers] = useState<Array<any>>();
 
   const fetchEvolution = async () => {
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
@@ -43,42 +58,156 @@ const Evolution = ({ id }: evolutionProps) => {
   };
 
   const getEvolutionChain = async (evolution: evolution) => {
-    const firstName = evolution.chain.species.name;
-    const secondName = evolution.chain.evolves_to[0].species.name;
-    const thirdName = evolution.chain.evolves_to[0].evolves_to[0].species.name;
-    const array = [firstName, secondName, thirdName];
-    const promises = array.map((name) =>
+    const { id } = evolution;
+    let pokemonsName;
+    let triggers = [];
+    // set Eevee chain
+    if (id === 67) {
+      const firstName = evolution.chain.species.name;
+      const evolves = evolution.chain.evolves_to.slice(0, 5);
+      triggers = evolves.map((ev) => {
+        const { item, trigger, min_happiness, time_of_day, min_level } =
+          ev.evolution_details[0];
+        return { item, trigger, min_happiness, time_of_day, min_level };
+      });
+
+      const names = evolves.map((ev) => ev.species.name);
+      pokemonsName = [firstName, ...names];
+    } else {
+      const evolve = evolution.chain.evolves_to[0];
+      const firstName = evolution.chain.species.name;
+      const secondName = evolve ? evolve.species.name : '';
+      let thirdName;
+      const { item, trigger, min_happiness, time_of_day, min_level } =
+        evolve.evolution_details[0];
+      triggers.push({ item, trigger, min_happiness, time_of_day, min_level });
+      if (secondName) {
+        const evolve = evolution.chain.evolves_to[0].evolves_to[0];
+        const { item, trigger, min_happiness, time_of_day, min_level } =
+          evolve.evolution_details[0];
+
+        thirdName = evolve ? evolve.species.name : '';
+        triggers.push({ item, trigger, min_happiness, time_of_day, min_level });
+      }
+
+      const array = [firstName, secondName, thirdName];
+      pokemonsName = array.filter((name) => {
+        if (name) return name;
+      });
+    }
+    const promises = pokemonsName.map((name) =>
       fetch(`https://pokeapi.co/api/v2/pokemon/${name}`).then((resp) =>
         resp.json()
       )
     );
+    setTriggers(triggers);
     const evolutionChain = await Promise.all(promises);
     setEvolution(evolutionChain);
   };
 
-  const getEvolution = () => {
-    const type = evolution ? evolution[0].types[0].type.name : '';
-    const content = contents.find((content) => content.type === type);
-    const color = content?.defaultColor;
-    const evolutionList = evolution?.map((pokemon) => {
+  const getTriggers = () => {
+    const triggersElements = triggers?.map((tri: evolutionDetail) => {
+      const { item, min_happiness, min_level, trigger, time_of_day } = tri;
+      let text = '';
+      if (trigger.name === 'level-up' && !min_level)
+        text = time_of_day + ', happiness: ' + min_happiness;
+      else if (trigger.name === 'level-up') text = min_level + '+';
+      else if (trigger.name === 'use-item') text = item.name;
+      text = text.toUpperCase();
       return (
-        <figure className={styles.imageWrapper} key={pokemon.name}>
-          <p style={{ backgroundColor: color }} className={styles.pokemonName}>
-            {pokemon.name}
-          </p>
-          <Image
-            src={pokemon.sprites.front_default}
-            alt={pokemon.name}
-            layout="fill"
-          />
-        </figure>
+        <div className={styles.trigger} key={text}>
+          {text}
+          <i className="fas fa-arrow-right"></i>
+        </div>
       );
     });
-    return <div className={styles.evolutionWrapper}>{evolutionList}</div>;
+    return triggersElements;
+  };
+
+  const getEvolution = () => {
+    let evolutionList;
+    let classList;
+
+    if (evolution) {
+      // If Eevee
+      if (evolution.length > 3) {
+        // get Eevee Image
+        classList = styles.evolutionWrapperColumn;
+        const firstOne = evolution[0];
+        let { name, id } = firstOne;
+        const type = firstOne.types[0].type.name;
+        const content = contents.find((content) => content.type === type);
+        const color = content?.defaultColor;
+
+        name = name[0].toUpperCase() + name.substring(1);
+        const props = { name, id, color, src: firstOne.sprites.front_default };
+        const firstImage = createImage(props);
+
+        const triggersElements = getTriggers();
+
+        evolutionList = evolution.map((pokemon, index) => {
+          if (index === 1) return null;
+          let { name, id } = pokemon;
+          const type = pokemon.types[0].type.name;
+          const content = contents.find((content) => content.type === type);
+          const color = content?.defaultColor;
+          name = name[0].toUpperCase() + name.substring(1);
+          const props = { name, id, color, src: pokemon.sprites.front_default };
+          const image = createImage(props);
+          return (
+            <div className={styles.evolutionBox} key={name + id}>
+              {firstImage}
+              {triggersElements ? triggersElements[index - 1] : null}
+              {image}
+            </div>
+          );
+        });
+        evolutionList = evolutionList.slice(1);
+      } else {
+        const triggersElements = getTriggers();
+        classList = styles.evolutionWrapper;
+        evolutionList = evolution.map((pokemon, index) => {
+          let { name, id } = pokemon;
+          const type = pokemon.types[0].type.name;
+          const content = contents.find((content) => content.type === type);
+          const color = content?.defaultColor;
+          name = name[0].toUpperCase() + name.substring(1);
+          const props = { name, id, color, src: pokemon.sprites.front_default };
+          return (
+            <>
+              {createImage(props)}
+              {triggersElements && triggersElements[index]
+                ? triggersElements[index]
+                : null}
+            </>
+          );
+        });
+      }
+    }
+    return <div className={classList}>{evolutionList}</div>;
+  };
+
+  const createImage = ({ name, id, color, src }: createImageProps) => {
+    return (
+      <Link key={name} href="/pokemon/[id]" as={`/pokemon/${id}`}>
+        <a>
+          <figure className={styles.imageWrapper}>
+            <p
+              style={{ backgroundColor: color }}
+              className={styles.pokemonName}
+            >
+              {name}
+            </p>
+            <Image src={src} alt={name} layout="fill" />
+          </figure>
+        </a>
+      </Link>
+    );
   };
 
   useEffect(() => {
     fetchEvolution();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
