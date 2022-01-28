@@ -78,16 +78,24 @@ const Evolution = ({ id }: evolutionProps) => {
       const firstName = evolution.chain.species.name;
       const secondName = evolve ? evolve.species.name : '';
       let thirdName;
-      const { item, trigger, min_happiness, time_of_day, min_level } =
-        evolve.evolution_details[0];
-      triggers.push({ item, trigger, min_happiness, time_of_day, min_level });
       if (secondName) {
-        const evolve = evolution.chain.evolves_to[0].evolves_to[0];
         const { item, trigger, min_happiness, time_of_day, min_level } =
           evolve.evolution_details[0];
-
-        thirdName = evolve ? evolve.species.name : '';
         triggers.push({ item, trigger, min_happiness, time_of_day, min_level });
+        const nextEvolve = evolution.chain.evolves_to[0].evolves_to[0];
+        if (nextEvolve) {
+          const { item, trigger, min_happiness, time_of_day, min_level } =
+            nextEvolve.evolution_details[0];
+
+          thirdName = nextEvolve ? nextEvolve.species.name : '';
+          triggers.push({
+            item,
+            trigger,
+            min_happiness,
+            time_of_day,
+            min_level,
+          });
+        }
       }
 
       const array = [firstName, secondName, thirdName];
@@ -110,7 +118,7 @@ const Evolution = ({ id }: evolutionProps) => {
       const { item, min_happiness, min_level, trigger, time_of_day } = tri;
       let text = '';
       if (trigger.name === 'level-up' && !min_level)
-        text = time_of_day + ', happiness: ' + min_happiness;
+        text = time_of_day + ' happiness: ' + min_happiness;
       else if (trigger.name === 'level-up') text = min_level + '+';
       else if (trigger.name === 'use-item') text = item.name;
       text = text.toUpperCase();

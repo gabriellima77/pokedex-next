@@ -20,7 +20,7 @@ const Pokemon = ({ pokemon }: pokemonProps) => {
   const content = contents.find((content) => content.type === type);
 
   const getStatus = () => {
-    const maxStatus = 300;
+    const maxStatus = 200;
     let total = 0;
     const status = pokemon.stats.map((content, index) => {
       const base = content.base_stat;

@@ -26,15 +26,21 @@ export const contents = [
   },
   {
     type: "poison",
+    defaultColor: "#EB6CFF",
+    linearBackground: "linear-gradient(90deg, #882398 0%, #882398 0.01%, #B02DC5 27.08%, #EB6CFF 51.04%, #B02DC5 75.52%, #882398 100%)",
   },
   {
     type: "psychic",
   },
   {
     type: "steel",
+    defaultColor: "#646464",
+    linearBackground: "linear-gradient(90deg, #777777 0%, #777777 0.01%, #989898 27.08%, #CECECE 51.04%, #989898 75.52%, #777777 100%)",
   },
   {
     type: "normal",
+    defaultColor: "#959595",
+    linearBackground: "linear-gradient(90deg, #ECD3FF 0%, #F699FF 0.01%, #F9B4FF 27.08%, #FCD8FF 51.04%, #F9B4FF 75.52%, #F699FF 100%)",
   },
   {
     type: 'ice',
@@ -53,6 +59,8 @@ export const contents = [
   },
   {
     type: "fairy",
+    defaultColor: "#B7018F",
+    linearBackground: "linear-gradient(90deg, #8D006E 0%, #8D006E 0.01%, #B1008A 27.08%, #FF00C7 51.04%, #B1008A 75.52%, #8D006E 100%)",
   },
   {
     type: "electric",
@@ -64,5 +72,7 @@ export const contents = [
   },
   {
     type: "bug",
+    defaultColor: "#4D7C00",
+    linearBackground: "linear-gradient(90deg, #65911F 0%, #548800 0.01%, #66A500 27.08%, #8BE100 51.04%, #66A500 75.52%, #548800 100%)",
   },
 ];
