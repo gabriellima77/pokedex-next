@@ -7,13 +7,29 @@ import styles from '../../../styles/Home.module.css';
 import TypeCarousel from '../../../components/TypeCarousel';
 
 const Type = ({ pokemon }: any) => {
-  const { pokemons } = pokemon;
+  const { ids } = pokemon;
   const type = pokemon.types[0].type.name;
-  const [filteredList, setFilteredList] = useState<Pokemons>(pokemons);
+  const [filteredList, setFilteredList] = useState<Pokemons>([]);
+
+  const getPokemons = async () => {
+    const promises = [];
+    for (let i = 0; i < ids.length; i++) {
+      if (+ids[i] > 251) break;
+      const res = fetch(`https://pokeapi.co/api/v2/pokemon/${+ids[i]}`).then(
+        (resp) => resp.json()
+      );
+      promises.push(res);
+    }
+
+    const pokemons = await Promise.all(promises);
+    setFilteredList(pokemons);
+  };
 
   useEffect(() => {
-    setFilteredList(pokemons);
-  }, [pokemons]);
+    setFilteredList([]);
+    getPokemons();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ids]);
 
   const getCards = () =>
     filteredList.map((pokemon: pokemon) => {
@@ -58,19 +74,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return id;
   });
 
-  const promises = [];
-  for (let i = 0; i < ids.length; i++) {
-    if (+ids[i] > 251) break;
-    const res = fetch(`https://pokeapi.co/api/v2/pokemon/${+ids[i]}`).then(
-      (resp) => resp.json()
-    );
-    promises.push(res);
-  }
-
-  const pokemons = await Promise.all(promises);
-
   const types = [{ type: { name: type } }];
-  const pokemon = { types, pokemons };
+  const pokemon = { types, ids };
 
   return {
     props: {
