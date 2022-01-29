@@ -110,6 +110,10 @@
 }
 
 @media (max-width: 768px) {
+  .title {
+    height: fit-content;
+  }
+
   .nav {
     height: fit-content;
     padding: 10px 0;
