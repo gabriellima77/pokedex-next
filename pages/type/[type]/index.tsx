@@ -8,10 +8,8 @@ import TypeCarousel from '../../../components/TypeCarousel';
 
 const Type = ({ pokemon }: any) => {
   const { pokemons } = pokemon;
-  console.log(pokemons);
-  const [allPokemons, setAllPokemons] = useState<Pokemons>(pokemons);
+  const type = pokemon.types[0].type.name;
   const [filteredList, setFilteredList] = useState<Pokemons>(pokemons);
-  console.log(pokemon);
 
   useEffect(() => {
     setFilteredList(pokemons);
@@ -38,7 +36,7 @@ const Type = ({ pokemon }: any) => {
     });
   return (
     <main className={styles.main}>
-      <TypeCarousel />
+      <TypeCarousel currentType={type} />
       <div className={styles.grid}>{getCards()}</div>
     </main>
   );

@@ -2,16 +2,19 @@ import React, { useState, useEffect, useContext } from 'react';
 import type { GetStaticProps, NextPage, InferGetStaticPropsType } from 'next';
 import Link from 'next/link';
 import styles from '../styles/Home.module.css';
+import { getSVG } from '../components/SVG/GetSVG';
 import Card from '../components/Card';
 import { pokemon, Pokemons } from './pokemonType';
 import { SearchContext } from '../components/Layout';
 import TypeCarousel from '../components/TypeCarousel';
+import Image from 'next/image';
 
 const Home: NextPage = ({
   pokemons,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [allPokemons, setAllPokemons] = useState<Pokemons>(pokemons);
   const [filteredList, setFilteredList] = useState<Pokemons>(pokemons);
+  const [isLoading, setIsLoading] = useState(false);
   const maxPokemons = 251;
   let searchValue = useContext(SearchContext);
 
@@ -20,6 +23,7 @@ const Home: NextPage = ({
     const scrollPosition = window.innerHeight + window.scrollY;
     const bottom = document.body.offsetHeight;
     if (scrollPosition >= bottom) {
+      setIsLoading(true);
       // Remove Event
       window.onscroll = null;
       const lastValue = allPokemons.length;
@@ -63,6 +67,7 @@ const Home: NextPage = ({
       window.onscroll = null;
       setFilteredList(allPokemons);
     }
+    setIsLoading(false);
     return () => {
       window.onscroll = null;
     };
@@ -89,10 +94,30 @@ const Home: NextPage = ({
       );
     });
 
+  const nothingFound = () => {
+    return (
+      <div className={styles.nothingFound}>
+        <figure className={styles.slowpokeWrapper}>
+          <Image src="/slowpoke.png" layout="fill" alt="Slowpoke" />
+        </figure>
+        <h3>Nothing found or Data is not fully loaded!</h3>
+      </div>
+    );
+  };
+
   return (
     <main className={styles.main}>
       <TypeCarousel />
-      <div className={styles.grid}>{getCards()}</div>
+      {filteredList.length > 0 ? (
+        <div className={styles.grid}>{getCards()}</div>
+      ) : (
+        nothingFound()
+      )}
+      {isLoading ? (
+        <div className={styles.loading}>
+          {getSVG({ color: '#FF1100', width: 50, opacity: 1 })}
+        </div>
+      ) : null}
     </main>
   );
 };

@@ -4,7 +4,11 @@ import { getSVG } from './SVG/GetSVG';
 import styles from '../styles/Home.module.css';
 import Link from 'next/link';
 
-const TypeCarousel = () => {
+interface typeProps {
+  currentType?: string;
+}
+
+const TypeCarousel = ({ currentType }: typeProps) => {
   const [movement, setMovement] = useState(0);
   const marginRight = 0;
   const size = 50;
@@ -12,11 +16,12 @@ const TypeCarousel = () => {
     return contents.map((content, index) => {
       const color = content.defaultColor;
       const type = content.type;
+      const active = currentType === type ? '#414141' : '';
       return (
         <Link key={type + index} href="/type/[type]" as={`/type/${type}`}>
-          <a>
+          <a style={{ width: '100%', height: '100%' }}>
             <li
-              style={{ margin: `0px ${marginRight}px` }}
+              style={{ margin: `0px ${marginRight}px`, background: active }}
               className={styles.slide}
             >
               {getSVG({ color, width: 30, type })}

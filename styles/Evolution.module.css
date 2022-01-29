@@ -96,6 +96,10 @@
     font-size: 14px;
   }
 
+  .evolutionWrapper {
+    width: 95%;
+  }
+
   .evolutionBox {
     width: 100px;
   }

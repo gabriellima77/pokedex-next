@@ -131,6 +131,10 @@
 }
 
 @media (max-width: 768px) {
+  .pokemonName {
+    font-size: 48px;
+  }
+
   .statusContainer {
     flex-direction: column;
     align-items: center;
@@ -142,6 +146,10 @@
 }
 
 @media (max-width: 420px) {
+  .pokemonName {
+    font-size: 32px;
+  }
+
   .status {
     align-items: center;
     width: 100%;
