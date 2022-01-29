@@ -1,5 +1,5 @@
-import React, { ContextType, useEffect, useState } from 'react';
-import styles from '../styles/Layout.module.css';
+import React, { useEffect, useState } from 'react';
+import layoutStyles from '../styles/Layout.module.css';
 import Meta from './Meta';
 import Nav from './Nav';
 import { pokemon } from '../pages/pokemonType';
@@ -16,7 +16,7 @@ const Layout = ({ children }: layoutProps) => {
   const [value, setValue] = useState('');
   const [show, setShow] = useState(false);
 
-  // Nav styles and Pokemon page styles
+  // Nav layoutStyles and Pokemon page layoutStyles
   const pokemon: pokemon = children.props?.pokemon;
   const type = pokemon ? pokemon.types[0].type.name : '';
   const typeContent = contents.find((content) => content.type === type);
@@ -45,12 +45,12 @@ const Layout = ({ children }: layoutProps) => {
       {pageType !== 'Custom404' ? (
         <Nav type={type} value={value} setValue={setValue} />
       ) : null}
-      <div className={styles.container}>
+      <div className={layoutStyles.container}>
         {getSVG({
           width: 600,
           color: svgColor,
           opacity: svgOpacity,
-          classList: styles.pokeball,
+          classList: layoutStyles.pokeball,
         })}
         <SearchContext.Provider value={value}>
           {children}
@@ -58,7 +58,7 @@ const Layout = ({ children }: layoutProps) => {
       </div>
       <button
         style={{ display: show ? 'block' : 'none' }}
-        className={styles.upBtn}
+        className={layoutStyles.upBtn}
         onClick={goUp}
       >
         <i className="fas fa-angle-double-up"></i>

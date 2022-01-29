@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { Pokemons } from '../pages/pokemonType';
-import styles from '../styles/Evolution.module.css';
+import evolutionStyles from '../styles/Evolution.module.css';
 import { contents } from '../data';
 import Link from 'next/link';
 
@@ -123,7 +123,7 @@ const Evolution = ({ id }: evolutionProps) => {
       else if (trigger.name === 'use-item') text = item.name;
       text = text.toUpperCase();
       return (
-        <div className={styles.trigger} key={text}>
+        <div className={evolutionStyles.trigger} key={text}>
           {text}
           <i className="fas fa-arrow-right"></i>
         </div>
@@ -140,7 +140,7 @@ const Evolution = ({ id }: evolutionProps) => {
       // If Eevee
       if (evolution.length > 3) {
         // get Eevee Image
-        classList = styles.evolutionWrapperColumn;
+        classList = evolutionStyles.evolutionWrapperColumn;
         const firstOne = evolution[0];
         let { name, id } = firstOne;
         const type = firstOne.types[0].type.name;
@@ -163,7 +163,7 @@ const Evolution = ({ id }: evolutionProps) => {
           const props = { name, id, color, src: pokemon.sprites.front_default };
           const image = createImage(props);
           return (
-            <div className={styles.evolutionBox} key={name + id}>
+            <div className={evolutionStyles.evolutionBox} key={name + id}>
               {firstImage}
               {triggersElements ? triggersElements[index - 1] : null}
               {image}
@@ -173,7 +173,7 @@ const Evolution = ({ id }: evolutionProps) => {
         evolutionList = evolutionList.slice(1);
       } else {
         const triggersElements = getTriggers();
-        classList = styles.evolutionWrapper;
+        classList = evolutionStyles.evolutionWrapper;
         evolutionList = evolution.map((pokemon, index) => {
           let { name, id } = pokemon;
           const type = pokemon.types[0].type.name;
@@ -199,10 +199,10 @@ const Evolution = ({ id }: evolutionProps) => {
     return (
       <Link key={name} href="/pokemon/[id]" as={`/pokemon/${id}`}>
         <a>
-          <figure className={styles.imageWrapper}>
+          <figure className={evolutionStyles.imageWrapper}>
             <p
               style={{ backgroundColor: color }}
-              className={styles.pokemonName}
+              className={evolutionStyles.pokemonName}
             >
               {name}
             </p>
@@ -219,8 +219,8 @@ const Evolution = ({ id }: evolutionProps) => {
   }, []);
 
   return (
-    <section className={styles.evolutionContainer}>
-      <h2 className={styles.evolutionTitle}>Evolution</h2>
+    <section className={evolutionStyles.evolutionContainer}>
+      <h2 className={evolutionStyles.evolutionTitle}>Evolution</h2>
       {getEvolution()}
     </section>
   );

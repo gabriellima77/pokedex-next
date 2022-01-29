@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import { getSVG } from './SVG/GetSVG';
 import { contents } from '../data';
-import styles from '../styles/Card.module.css';
+import cardStyle from '../styles/Card.module.css';
 
 interface cardProps {
   title: string;
@@ -37,27 +37,27 @@ const Card = ({ title, id, type, imageUrl }: cardProps) => {
   return (
     <div onMouseMove={moveCard} onMouseLeave={resetRotation}>
       <div
-        className={styles.cardContainer}
+        className={cardStyle.cardContainer}
         style={{
           background: typeContent?.linearBackground,
           transform: rotation,
         }}
       >
         <div>
-          <div className={styles.titleContainer}>
-            <div className={styles.indexContainer}>
+          <div className={cardStyle.titleContainer}>
+            <div className={cardStyle.indexContainer}>
               {getSVG({
                 type: 'pokeball',
                 width: 50,
                 opacity: 1,
                 classList: '',
               })}
-              <p className={styles.index}>#{id}</p>
+              <p className={cardStyle.index}>#{id}</p>
             </div>
             {capitalTitle}
           </div>
           <div
-            className={styles.type}
+            className={cardStyle.type}
             style={{
               background: typeContent?.defaultColor,
               boxShadow: `0px 0px 5px ${typeContent?.defaultColor}`,
@@ -67,10 +67,10 @@ const Card = ({ title, id, type, imageUrl }: cardProps) => {
           </div>
         </div>
 
-        <figure className={styles.image}>
+        <figure className={cardStyle.image}>
           <Image src={imageUrl} layout="fill" alt={title} />
         </figure>
-        <div className={styles.pokeballBk}>
+        <div className={cardStyle.pokeballBk}>
           {getSVG({ width: 150, color: typeContent?.defaultColor })}
         </div>
       </div>
