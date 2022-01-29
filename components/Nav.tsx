@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { contents } from '../data';
-import styles from '../styles/Nav.module.css';
+import styles from '../styles/Layout.module.css';
 
 interface navProps {
   type: string;

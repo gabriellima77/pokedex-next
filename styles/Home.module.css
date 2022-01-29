@@ -99,6 +99,75 @@
   position: relative;
 }
 
+.cardContainer {
+  width: 300px;
+  height: 120px;
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  perspective: 1000px;
+}
+
+.type {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin: 5px 0px 0px 25px;
+}
+
+.pokeballBk {
+  right: 0;
+  height: 120px;
+  position: absolute;
+  overflow: hidden;
+}
+
+.pokeballBk svg {
+  position: relative;
+  right: -75px;
+  top: -10px;
+  transform: rotate(-45deg);
+}
+
+.titleContainer {
+  display: flex;
+  height: fit-content;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0px 0px 15px;
+  font-size: 16px;
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.indexContainer {
+  display: grid;
+  place-items: center;
+  height: fit-content;
+  position: relative;
+  margin-right: 5px;
+}
+
+.index {
+  position: absolute;
+  color: #5a5a5a;
+  font-size: 14px;
+  text-shadow: 0px 0px 5px rgba(255, 255, 255, 1);
+}
+
+.image {
+  position: relative;
+  height: 175px;
+  width: 175px;
+  top: -40px;
+  z-index: 2;
+}
+
 @keyframes loop {
   0% {
     transform: rotate(0deg);

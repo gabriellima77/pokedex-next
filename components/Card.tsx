@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import { getSVG } from './SVG/GetSVG';
 import { contents } from '../data';
-import cardStyle from '../styles/Card.module.css';
+import cardStyle from '../styles/Home.module.css';
 
 interface cardProps {
   title: string;
