@@ -21,7 +21,8 @@ const Home: NextPage = ({
   // Add 30 new pokemons to allPokemons state
   const loadMore = async () => {
     const scrollPosition = window.innerHeight + window.scrollY;
-    const bottom = document.body.offsetHeight;
+    const distance = 50;
+    const bottom = document.body.offsetHeight - distance;
     if (scrollPosition >= bottom) {
       setIsLoading(true);
       // Remove Event
