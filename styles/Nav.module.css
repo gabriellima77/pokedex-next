@@ -19,6 +19,7 @@
   margin-left: 50px;
   color: white;
   font-size: 32px;
+  text-shadow: 3px 3px 5px #414141;
 }
 
 .above {
@@ -28,29 +29,11 @@
 
 .title {
   color: #eeeeee;
+  text-shadow: 3px 3px 5px #414141;
   font-size: 32px;
   font-weight: bolder;
   letter-spacing: 4px;
   margin-left: 50px;
-}
-
-.list {
-  margin-left: auto;
-  margin-right: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  list-style: none;
-}
-
-.list li {
-  font-weight: bold;
-  color: #fff;
-}
-
-.list li i {
-  margin-right: 5px;
-  color: rgb(255, 36, 36);
 }
 
 .searchContainer {

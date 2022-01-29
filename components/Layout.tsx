@@ -26,6 +26,9 @@ const Layout = ({ children }: layoutProps) => {
   const goUp = () => window.scrollTo(0, 0);
   const showUp = () => (window.scrollY < 100 ? setShow(false) : setShow(true));
 
+  const pageType = children.type.name;
+  console.log(pageType);
+
   // clean searchBar
   useEffect(() => {
     const pageType = children.type.name;
@@ -40,7 +43,9 @@ const Layout = ({ children }: layoutProps) => {
   return (
     <>
       <Meta />
-      <Nav type={type} value={value} setValue={setValue} />
+      {pageType !== 'Custom404' ? (
+        <Nav type={type} value={value} setValue={setValue} />
+      ) : null}
       <div className={styles.container}>
         {getSVG({
           width: 600,

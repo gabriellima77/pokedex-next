@@ -31,6 +31,8 @@ export const contents = [
   },
   {
     type: "psychic",
+    defaultColor: "#5F0099",
+    linearBackground: "linear-gradient(89.98deg, #6800A8 0.01%, #9E88AA 27.09%, #C8C8C8 51.04%, #9E88AA 75.51%, #6800A8 99.99%)",
   },
   {
     type: "steel",
@@ -44,18 +46,28 @@ export const contents = [
   },
   {
     type: 'ice',
+    defaultColor: "#00B6C1",
+    linearBackground: "linear-gradient(90deg, #00CEDB 0%, rgba(0, 206, 219, 0.5) 27.08%, rgba(0, 206, 219, 0.25) 51.04%, rgba(0, 206, 219, 0.5) 75.52%, #00CEDB 100%)",
   },
   {
     type: 'ground',
+    defaultColor: "#A3A300",
+    linearBackground: "linear-gradient(90deg, #8E8E00 0%, #C5C500 27.08%, #EDED00 51.04%, #C5C500 75.52%, #8E8E00 100%)",
   },
   {
     type: "ghost",
+    defaultColor: "#C6C6C6",
+    linearBackground: "linear-gradient(90deg, #D9D9D9 0%, #D9D9D9 0.01%, #FFFFFF 27.08%, #FFFFFF 51.04%, #FFFFFF 75.52%, #D9D9D9 100%)",
   },
   {
     type: "flying",
+    defaultColor: "#A7B472",
+    linearBackground: "linear-gradient(90deg, #B3C17A 0%, #B3C17A 0.01%, #D4E491 27.08%, #EDFFA3 51.04%, #D4E491 75.52%, #B3C17A 100%)",
   },
   {
     type: "fighting",
+    defaultColor: "#5A8968",
+    linearBackground: "linear-gradient(90deg, #71AA81 0%, #60906E 0.01%, #73AC84 27.08%, #9CE8B3 51.04%, #73AC84 75.52%, #60916E 100%)",
   },
   {
     type: "fairy",
@@ -69,6 +81,8 @@ export const contents = [
   },
   {
     type: "dragon",
+    defaultColor: "#932D2D",
+    linearBackground: "linear-gradient(90deg, #AAA471 0%, #872020 0.01%, #B32A2A 27.08%, #FF3D3D 51.04%, #B22A2A 75.52%, #872020 100%)",
   },
   {
     type: "bug",
