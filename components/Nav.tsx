@@ -36,9 +36,10 @@ const Nav = ({ type, value, setValue }: navProps) => {
     );
   };
 
+  const classList = !type ? styles.nav : styles.nav + ` ${styles.reverse}`;
   return (
     <nav
-      className={styles.nav}
+      className={classList}
       style={{
         background: linearGradient,
         boxShadow: `4px 0 4px 4px ${
@@ -47,13 +48,21 @@ const Nav = ({ type, value, setValue }: navProps) => {
       }}
     >
       <div className={styles.above}>
-        <Link href="/" passHref>
+        <Link href="/">
           <a>
             <h1 className={styles.title}>PokeDex</h1>
           </a>
         </Link>
       </div>
-      {!type ? getSearchBar() : null}
+      {!type ? (
+        getSearchBar()
+      ) : (
+        <Link href="/">
+          <a className={styles.goBack}>
+            <i className="fas fa-arrow-left"></i>
+          </a>
+        </Link>
+      )}
     </nav>
   );
 };

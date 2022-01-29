@@ -11,7 +11,6 @@ import Moves from '../../../components/Moves';
 
 interface pokemonProps {
   pokemon: pokemon;
-  setType: (a: string) => void;
 }
 
 const Pokemon = ({ pokemon }: pokemonProps) => {
@@ -21,8 +20,10 @@ const Pokemon = ({ pokemon }: pokemonProps) => {
   const content = contents.find((content) => content.type === type);
 
   const getStatus = () => {
-    console.log(window.innerWidth);
-    const marginRight = window.innerWidth > 420 ? '305px' : '205px';
+    const marginRight =
+      typeof window !== 'undefined' && window.innerWidth > 420
+        ? '305px'
+        : '205px';
     const maxStatus = 200;
     let total = 0;
     const status = pokemon.stats.map((content, index) => {

@@ -48,6 +48,7 @@
   align-items: center;
   width: 320px;
   height: 320px;
+  z-index: 10;
 }
 
 .pokeImage {
@@ -97,6 +98,7 @@
   display: flex;
   justify-content: flex-end;
   margin-bottom: 20px;
+  z-index: 10;
 }
 
 .status p {

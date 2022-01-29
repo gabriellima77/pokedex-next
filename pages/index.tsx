@@ -5,6 +5,7 @@ import styles from '../styles/Home.module.css';
 import Card from '../components/Card';
 import { pokemon, Pokemons } from './pokemonType';
 import { SearchContext } from '../components/Layout';
+import TypeCarousel from '../components/TypeCarousel';
 
 const Home: NextPage = ({
   pokemons,
@@ -90,6 +91,7 @@ const Home: NextPage = ({
 
   return (
     <main className={styles.main}>
+      <TypeCarousel />
       <div className={styles.grid}>{getCards()}</div>
     </main>
   );

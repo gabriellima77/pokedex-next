@@ -182,12 +182,12 @@ const Evolution = ({ id }: evolutionProps) => {
           name = name[0].toUpperCase() + name.substring(1);
           const props = { name, id, color, src: pokemon.sprites.front_default };
           return (
-            <>
+            <div className={styles.evolutionBox} key={name + id}>
               {createImage(props)}
               {triggersElements && triggersElements[index]
                 ? triggersElements[index]
                 : null}
-            </>
+            </div>
           );
         });
       }

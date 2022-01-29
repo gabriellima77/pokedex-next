@@ -95,6 +95,11 @@
   .pokemonName {
     font-size: 14px;
   }
+
+  .evolutionBox {
+    width: 100px;
+  }
+
   .imageWrapper {
     width: 90px;
     height: 90px;

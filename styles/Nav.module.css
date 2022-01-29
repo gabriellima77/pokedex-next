@@ -10,9 +10,20 @@
   z-index: 999;
 }
 
+.nav.reverse {
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.goBack {
+  margin-left: 50px;
+  color: white;
+  font-size: 32px;
+}
+
 .above {
   display: flex;
-  flex: 1;
+  margin-right: 50px;
 }
 
 .title {
@@ -90,8 +101,6 @@
     flex-direction: column;
   }
 
-  .title,
-  .list,
   .searchContainer {
     margin: 0;
     margin-top: 10px;
