@@ -16,11 +16,19 @@ const Card = ({ title, id, type, imageUrl }: cardProps) => {
   const capitalTitle = title[0].toUpperCase() + title.substring(1);
   const [rotation, setRotation] = useState('');
 
-  const moveCard = (event: React.MouseEvent) => {
+  const moveCard = (event: React.MouseEvent | React.TouchEvent) => {
     const mostX = 12.5;
     const mostY = 12.5;
-    const x = event.nativeEvent.offsetX;
-    const y = event.nativeEvent.offsetY;
+    let x;
+    let y;
+    if (event.nativeEvent instanceof MouseEvent) {
+      x = event.nativeEvent.offsetX;
+      y = event.nativeEvent.offsetY;
+    } else {
+      const rect = event.currentTarget.getBoundingClientRect();
+      x = event.nativeEvent.targetTouches[0].pageX - rect.left;
+      y = event.nativeEvent.targetTouches[0].pageY - rect.top;
+    }
 
     const { width, height } = event.currentTarget.getBoundingClientRect();
     const halfWidth = width / 2;
@@ -35,7 +43,12 @@ const Card = ({ title, id, type, imageUrl }: cardProps) => {
   const resetRotation = () => setRotation('');
 
   return (
-    <div onMouseMove={moveCard} onMouseLeave={resetRotation}>
+    <div
+      onTouchMove={moveCard}
+      onTouchEnd={resetRotation}
+      onMouseMove={moveCard}
+      onMouseLeave={resetRotation}
+    >
       <div
         className={cardStyle.cardContainer}
         style={{
