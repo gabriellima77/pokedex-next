@@ -27,7 +27,6 @@ const Layout = ({ children }: layoutProps) => {
   const showUp = () => (window.scrollY < 100 ? setShow(false) : setShow(true));
 
   const pageType = children.type.name;
-  console.log(pageType);
 
   // clean searchBar
   useEffect(() => {
