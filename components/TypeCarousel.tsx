@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { contents } from '../data';
 import { getSVG } from './SVG/GetSVG';
 import styles from '../styles/Home.module.css';
@@ -31,6 +31,22 @@ const TypeCarousel = ({ currentType }: typeProps) => {
       );
     });
   };
+
+  // move Carousel based on currentType
+  useEffect(() => {
+    let index = contents.findIndex((content) => content.type === currentType);
+    let lastType = 9;
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth <= 615) lastType = 5;
+    }
+    if (index < 0) index = 0;
+    else if (index >= contents.length - lastType)
+      index = contents.length - lastType;
+    const position = index * (size + marginRight * 2);
+    if (movement === position) return;
+    setMovement(position);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentType]);
 
   const moveRight = () => {
     const position = Math.abs(movement);

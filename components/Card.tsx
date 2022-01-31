@@ -26,7 +26,7 @@ const Card = ({ title, id, type, imageUrl }: cardProps) => {
       y = event.nativeEvent.offsetY;
     } else {
       const rect = event.currentTarget.getBoundingClientRect();
-      x = event.nativeEvent.targetTouches[0].clientY - rect.x;
+      x = event.nativeEvent.targetTouches[0].clientX - rect.x;
       y = event.nativeEvent.targetTouches[0].clientY - rect.y;
     }
 

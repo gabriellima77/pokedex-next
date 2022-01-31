@@ -54,6 +54,7 @@
   place-items: center;
   width: 50px;
   height: 100%;
+  user-select: none;
 }
 
 .carouselBtn {
